@@ -15,7 +15,7 @@ public class StackTest {
     }
 
     @Test
-    public void testPush() throws Exception {
+    public void testPushPop() throws Exception {
         Stack<String> shakespeare = new Stack<>();
         shakespeare.push("To");
         shakespeare.push("Be");
