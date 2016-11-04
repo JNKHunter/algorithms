@@ -5,7 +5,7 @@ import java.util.Stack;
  */
 public class DijkstrasTwoStack {
 
-    public static double Evaluate(String exp){
+    public static double evaluate(String exp){
         Stack<String> ops = new Stack<>();
         Stack<Double> vals = new Stack<>();
 
