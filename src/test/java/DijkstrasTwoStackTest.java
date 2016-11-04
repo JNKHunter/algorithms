@@ -21,9 +21,21 @@ public class DijkstrasTwoStackTest {
     }
 
     @Test
-    public void testTwoSingleParenthesisStatements() throws Exception{
+    public void testTwoStatements() throws Exception{
         double result = DijkstrasTwoStack.evaluate("((1+2)+(2+3))");
         assertEquals(8, result, 0.001);
+    }
+
+    @Test
+    public void testThreeStatements() throws Exception{
+        double result = DijkstrasTwoStack.evaluate("(((1+2)+(2+3))*3)");
+        assertEquals(24, result, 0.001);
+    }
+
+    @Test
+    public void testFourStatements() throws Exception{
+        double result = DijkstrasTwoStack.evaluate("((((1+2)+(2+3))*3)/8)");
+        assertEquals(3, result, 0.001);
     }
 
 }
