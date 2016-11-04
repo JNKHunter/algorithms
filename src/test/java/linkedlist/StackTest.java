@@ -13,7 +13,7 @@ public class StackTest {
 
     @Before
     public void setUp() throws Exception {
-        Stack<String> shakespeare = new Stack<>();
+        shakespeare = new Stack<>();
         shakespeare.push("To");
         shakespeare.push("Be");
         shakespeare.push("Or");
@@ -26,7 +26,16 @@ public class StackTest {
         assertEquals("Or", shakespeare.pop());
         assertEquals("Be", shakespeare.pop());
         assertEquals("To", shakespeare.pop());
-        assertEquals("To", shakespeare.pop());
+    }
+
+    @Test
+    public void testIsEmpty() throws Exception {
+        shakespeare.pop();
+        shakespeare.pop();
+        shakespeare.pop();
+        shakespeare.pop();
+
+        assertEquals(shakespeare.isEmpty(), true);
     }
 
 }
