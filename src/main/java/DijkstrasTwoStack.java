@@ -5,33 +5,32 @@ import java.util.Stack;
  */
 public class DijkstrasTwoStack {
 
-    public static double evaluate(String exp){
+    public static double evaluate(String exp) {
         Stack<String> ops = new Stack<>();
         Stack<Double> vals = new Stack<>();
 
-        for(int i = 0; i < exp.length(); i++){
+        for (int i = 0; i < exp.length(); i++) {
             String s = Character.toString(exp.charAt(i));
 
             //Do nothing
-            if(s.equals("("));
-            else if(s.equals("+")) ops.push(s);
-            else if(s.equals("-")) ops.push(s);
-            else if(s.equals("*")) ops.push(s);
-            else if(s.equals("/")) ops.push(s);
-            else if(s.equals("sqrt")) ops.push(s);
+            if (s.equals("(")) ;
+            else if (s.equals("+")) ops.push(s);
+            else if (s.equals("-")) ops.push(s);
+            else if (s.equals("*")) ops.push(s);
+            else if (s.equals("/")) ops.push(s);
+            else if (s.equals("sqrt")) ops.push(s);
             else if (s.equals(")")) {
                 String op = ops.pop();
                 double v = vals.pop();
-                if(op.equals("+")) v = vals.pop() + v;
+                if (op.equals("+")) v = vals.pop() + v;
                 else if (op.equals("-")) v = vals.pop() - v;
                 else if (op.equals("*")) v = vals.pop() * v;
                 else if (op.equals("/")) v = vals.pop() / v;
                 else if (op.equals("sqrt")) v = Math.sqrt(v);
                 vals.push(v);
-            }
-            else vals.push(Double.parseDouble(s));
+            } else vals.push(Double.parseDouble(s));
         }
-        return(vals.pop());
+        return (vals.pop());
     }
 
 }

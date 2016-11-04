@@ -10,12 +10,12 @@ public class Stack<Item> implements Iterable<Item> {
     private Node first;
     private int N;
 
-    private class Node{
+    private class Node {
         Item item;
         Node next;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return first == null;
     }
 
@@ -23,15 +23,15 @@ public class Stack<Item> implements Iterable<Item> {
         return N;
     }
 
-    public void push(Item item){
-        Node oldFirst= first;
+    public void push(Item item) {
+        Node oldFirst = first;
         first = new Node();
         first.item = item;
         first.next = oldFirst;
         N++;
     }
 
-    public Item pop(){
+    public Item pop() {
         Item item = first.item;
         first = first.next;
         N--;
