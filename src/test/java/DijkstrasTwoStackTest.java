@@ -15,9 +15,15 @@ public class DijkstrasTwoStackTest {
     }
 
     @Test
-    public void testExpressionWithNoParenthesis() throws Exception{
-        double result = DijkstrasTwoStack.evaluate("1+1");
+    public void testSingleParenthesis() throws Exception{
+        double result = DijkstrasTwoStack.evaluate("(1+1)");
         assertEquals(2, result, 0.001);
+    }
+
+    @Test
+    public void testTwoSingleParenthesisStatements() throws Exception{
+        double result = DijkstrasTwoStack.evaluate("((1+2)+(2+3))");
+        assertEquals(8, result, 0.001);
     }
 
 }

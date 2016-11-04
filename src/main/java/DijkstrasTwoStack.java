@@ -19,7 +19,7 @@ public class DijkstrasTwoStack {
             else if(s.equals("*")) ops.push(s);
             else if(s.equals("/")) ops.push(s);
             else if(s.equals("sqrt")) ops.push(s);
-            else if (s.equals("}")) {
+            else if (s.equals(")")) {
                 String op = ops.pop();
                 double v = vals.pop();
                 if(op.equals("+")) v = vals.pop() + v;
