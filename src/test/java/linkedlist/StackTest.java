@@ -9,19 +9,19 @@ import static org.junit.Assert.*;
  * Created by John on 11/4/16.
  */
 public class StackTest {
+    Stack<String> shakespeare;
+
     @Before
     public void setUp() throws Exception {
-
-    }
-
-    @Test
-    public void testPushPop() throws Exception {
         Stack<String> shakespeare = new Stack<>();
         shakespeare.push("To");
         shakespeare.push("Be");
         shakespeare.push("Or");
         shakespeare.push("Not");
+    }
 
+    @Test
+    public void testPop() throws Exception {
         assertEquals("Not", shakespeare.pop());
         assertEquals("Or", shakespeare.pop());
         assertEquals("Be", shakespeare.pop());
