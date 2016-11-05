@@ -26,6 +26,7 @@ public class Queue <Item> {
         Node oldLast = last;
         last = new Node();
         last.next = null;
+        last.item = item;
         if(isEmpty()){
             first = last;
         }else{
@@ -35,7 +36,7 @@ public class Queue <Item> {
     }
 
     public Item dequeue(){
-        Item item = first.item
+        Item item = first.item;
         first = first.next;
         N--;
         if(isEmpty()){
