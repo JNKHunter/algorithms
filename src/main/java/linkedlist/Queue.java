@@ -34,4 +34,14 @@ public class Queue <Item> {
         N++;
     }
 
+    public Item dequeue(){
+        Item item = first.item
+        first = first.next;
+        N--;
+        if(isEmpty()){
+            last = null;
+        }
+        return item;
+    }
+
 }
