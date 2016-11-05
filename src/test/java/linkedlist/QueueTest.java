@@ -29,4 +29,11 @@ public class QueueTest {
         assertEquals("Or", queue.dequeue());
     }
 
+    @Test
+    public void testEach() throws Exception {
+        for(String item: queue){
+            assertTrue(item instanceof String);
+        }
+    }
+
 }

@@ -1,9 +1,11 @@
 package linkedlist;
 
+import java.util.Iterator;
+
 /**
  * Created by John on 11/4/16.
  */
-public class Queue <Item> {
+public class Queue <Item> implements Iterable<Item> {
 
     private Node first;
     private Node last;
@@ -43,6 +45,33 @@ public class Queue <Item> {
             last = null;
         }
         return item;
+    }
+
+    @Override
+    public Iterator<Item> iterator() {
+        return new ListIterator();
+    }
+
+    private class ListIterator implements Iterator<Item> {
+
+        private Node current = first;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public Item next() {
+            Item item = current.item;
+            current = current.next;
+            return item;
+        }
+
+        @Override
+        public void remove() {
+            //noop
+        }
     }
 
 }

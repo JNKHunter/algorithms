@@ -38,4 +38,10 @@ public class StackTest {
         assertEquals(shakespeare.isEmpty(), true);
     }
 
+    @Test
+    public void testEach() throws Exception {
+        for(String item: shakespeare){
+            assertTrue(item instanceof String);
+        }
+    }
 }
