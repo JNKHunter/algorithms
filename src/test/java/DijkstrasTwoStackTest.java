@@ -38,4 +38,10 @@ public class DijkstrasTwoStackTest {
         assertEquals(3, result, 0.001);
     }
 
+    @Test
+    public void testFourStatementsDivision() throws Exception{
+        double result = DijkstrasTwoStack.evaluate("(((((1+2)+(2+3))*3)/8)*2)");
+        assertEquals(6, result, 0.001);
+    }
+
 }
