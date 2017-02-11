@@ -45,6 +45,10 @@ public class Percolation {
         }
 
         int index = rowCol2ArrayIndex(row, col);
+        sites[index] = true;
+        numOpenSites--;
+
+
         boolean isTop = false;
         boolean isBottom = false;
 
@@ -60,12 +64,35 @@ public class Percolation {
             isBottom = true;
         }
 
-        sites[index] = true;
-
         //If site has adjacent open sites, connect them
+        //If site is not on the left edge
+        if(index % n != 1){
+            if(sites[index - 1]){
+               uf.union(index, index-1);
+            }
+        }
 
-        //Decrement num of open sites
-        numOpenSites--;
+        //If site is not on the right edge
+        if(index % n != 0){
+            if(sites[index + 1]){
+                uf.union(index, index + 1);
+            }
+        }
+
+        //If site is not on the top edge
+        if(!isTop){
+            if(sites[index - n]){
+                uf.union(index, index + n);
+            }
+        }
+
+        //If site is not on the bottom edge
+        if(!isBottom){
+            if(sites[index + n]){
+                uf.union(index, index - n);
+            }
+        }
+
     }
 
     public int rowCol2ArrayIndex(int row, int col){
