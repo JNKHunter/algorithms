@@ -132,8 +132,7 @@ public class Percolation {
     }
 
     public boolean percolates(){
-        //TODO: Implement
-        return false;
+        return uf.connected(0, sites.length - 1);
     }
 
 

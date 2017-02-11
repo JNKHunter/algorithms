@@ -38,10 +38,17 @@ public class PercolationTest {
     }
 
     @Test
-    public void testUnion(){
+    public void testUnionAndPercolation(){
+        assertFalse(percolation.percolates());
         percolation.open(1,1);
         percolation.open(2,1);
         assertTrue(percolation.getUf().connected(1, 6));
-
+        percolation.open(3, 2);
+        percolation.open(4,2);
+        assertTrue(percolation.getUf().connected(12,17));
+        percolation.open(2,2);
+        assertTrue(percolation.getUf().connected(1,17));
+        percolation.open(5,2);
+        assertTrue(percolation.percolates());
     }
 }
