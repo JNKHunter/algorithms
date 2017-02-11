@@ -25,6 +25,18 @@ public class PercolationTest {
         assertEquals(12, percolation.rowCol2ArrayIndex(3,2));
     }
 
-    
+    @Test
+    public void testOpenSite(){
+        assertFalse(percolation.isOpen(1,1));
+        assertFalse(percolation.isOpen(5,5));
+
+        percolation.open(1,1);
+        assertTrue(percolation.isOpen(1,1));
+
+        percolation.open(5,5);
+        assertTrue(percolation.isOpen(5,5));
+    }
+
+
 
 }
