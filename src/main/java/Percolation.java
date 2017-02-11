@@ -20,13 +20,13 @@ public class Percolation {
         uf = new WeightedQuickUnionUF((n * n + 2));
         sites = new boolean[(n * n) + 2];
 
-        //Set top virtual site and bottom virtual site to open
-        sites[0] = true;
-        sites[sites.length - 1] = true;
-
         for(int i = 0; i < sites.length; i++){
             sites[i] = false;
         }
+
+        //Set top virtual site and bottom virtual site to open
+        sites[0] = true;
+        sites[sites.length - 1] = true;
 
         numOpenSites = n * n;
     }
@@ -55,12 +55,17 @@ public class Percolation {
         //If site is in the top row, connect it to the top n node sites[0]
         if(index > 0 && index <= n){
             uf.union(0, index);
+            System.out.println("connecting to top node");
+            System.out.println(uf.find(index));
             isTop = true;
         }
 
         //If site is in the bottom row, connect it to the bottom n node sites[length - 1]
         if((index >= rowCol2ArrayIndex(n,1)) && (index <= rowCol2ArrayIndex(n, n))){
             uf.union(sites.length - 1, index);
+            uf.union(sites.length - 1, index);
+            System.out.println("connecting to bottom node");
+            System.out.println(uf.find(index));
             isBottom = true;
         }
 
@@ -82,14 +87,14 @@ public class Percolation {
         //If site is not on the top edge
         if(!isTop){
             if(sites[index - n]){
-                uf.union(index, index + n);
+                uf.union(index, index - n);
             }
         }
 
         //If site is not on the bottom edge
         if(!isBottom){
             if(sites[index + n]){
-                uf.union(index, index - n);
+                uf.union(index, index + n);
             }
         }
 
@@ -97,6 +102,10 @@ public class Percolation {
 
     public int rowCol2ArrayIndex(int row, int col){
         return ((row - 1)* n) + col;
+    }
+
+    public WeightedQuickUnionUF getUf(){
+        return uf;
     }
 
     public int numberOfOpenSites(){
@@ -119,7 +128,6 @@ public class Percolation {
     }
 
     public boolean isFull(int row, int col){
-        //TODO: Implement
         return false;
     }
 

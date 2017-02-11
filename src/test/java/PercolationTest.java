@@ -37,6 +37,11 @@ public class PercolationTest {
         assertTrue(percolation.isOpen(5,5));
     }
 
+    @Test
+    public void testUnion(){
+        percolation.open(1,1);
+        percolation.open(2,1);
+        assertTrue(percolation.getUf().connected(1, 6));
 
-
+    }
 }
