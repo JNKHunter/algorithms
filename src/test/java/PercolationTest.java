@@ -16,8 +16,15 @@ public class PercolationTest {
     }
 
     @Test
-    public void checkNumSites(){
+    public void testNumSites(){
         assertEquals(25, percolation.getNumSites());
     }
+
+    @Test
+    public void testRowCol2ArrayIndex(){
+        assertEquals(12, percolation.rowCol2ArrayIndex(3,2));
+    }
+
+    
 
 }
