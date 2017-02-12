@@ -61,7 +61,6 @@ public class Percolation {
         //If site is in the bottom row, connect it to the bottom n node sites[length - 1]
         if((index >= rowCol2ArrayIndex(n,1)) && (index <= rowCol2ArrayIndex(n, n))){
             uf.union(sites.length - 1, index);
-            uf.union(sites.length - 1, index);
             isBottom = true;
         }
 
