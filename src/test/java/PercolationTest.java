@@ -50,5 +50,26 @@ public class PercolationTest {
         assertTrue(percolation.getUf().connected(1,17));
         percolation.open(5,2);
         assertTrue(percolation.percolates());
+        assertTrue(percolation.isFull(4,2));
+    }
+
+    @Test
+    public void testPercolation(){
+        Percolation perc8 = new Percolation(8);
+        perc8.open(5,6);
+        perc8.open(3,3);
+        perc8.open(5,3);
+        perc8.open(5,4);
+        perc8.open(8,5);
+        perc8.open(6,5);
+        perc8.open(5,3);
+        perc8.open(2,3);
+        perc8.open(5,3);
+        perc8.open(1,3);
+        perc8.open(4,3);
+        perc8.open(5,5);
+        assertFalse(perc8.percolates());
+        perc8.open(7,5);
+        assertTrue(perc8.percolates());
     }
 }

@@ -124,7 +124,8 @@ public class Percolation {
     }
 
     public boolean isFull(int row, int col){
-        return false;
+
+        return uf.connected(rowCol2ArrayIndex(row, col), 0);
     }
 
     public boolean percolates(){
