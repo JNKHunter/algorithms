@@ -55,8 +55,6 @@ public class Percolation {
         //If site is in the top row, connect it to the top n node sites[0]
         if(index > 0 && index <= n){
             uf.union(0, index);
-            System.out.println("connecting to top node");
-            System.out.println(uf.find(index));
             isTop = true;
         }
 
@@ -64,8 +62,6 @@ public class Percolation {
         if((index >= rowCol2ArrayIndex(n,1)) && (index <= rowCol2ArrayIndex(n, n))){
             uf.union(sites.length - 1, index);
             uf.union(sites.length - 1, index);
-            System.out.println("connecting to bottom node");
-            System.out.println(uf.find(index));
             isBottom = true;
         }
 
@@ -134,6 +130,4 @@ public class Percolation {
     public boolean percolates(){
         return uf.connected(0, sites.length - 1);
     }
-
-
 }
