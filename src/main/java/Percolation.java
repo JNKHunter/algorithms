@@ -28,7 +28,7 @@ public class Percolation {
         sites[0] = true;
         sites[sites.length - 1] = true;
 
-        numOpenSites = n * n;
+        numOpenSites = 0;
     }
 
     public int getNumSites(){
@@ -46,7 +46,7 @@ public class Percolation {
 
         int index = rowCol2ArrayIndex(row, col);
         sites[index] = true;
-        numOpenSites--;
+        numOpenSites++;
 
 
         boolean isTop = false;
