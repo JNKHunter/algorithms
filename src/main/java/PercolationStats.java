@@ -9,13 +9,16 @@ public class PercolationStats {
     private Percolation percolation;
     private int numTrials;
     private double mean;
+    private double[] trialRuns;
+    private double stddev;
 
     public PercolationStats(int n, int trials){
 
         numTrials = trials;
         double sumOfOpenSites = 0;
         double curPercent = 0;
-
+        trialRuns = new double[trials];
+        double sumOfSquares = 0;
 
         for(int i = 1; i <= trials; i++){
             percolation = new Percolation(n);
@@ -26,11 +29,17 @@ public class PercolationStats {
             int numopen = percolation.numberOfOpenSites();
 
             curPercent = ((double)percolation.numberOfOpenSites())/(n*n);
+            trialRuns[i-1] = curPercent;
             sumOfOpenSites = sumOfOpenSites + curPercent;
         }
 
         mean = (double)sumOfOpenSites / (double)trials;
-        System.out.println("The mean number of open sites is: " + mean);
+
+        for(Double value : trialRuns){
+            sumOfSquares = sumOfSquares + Math.pow((value - mean), 2);
+        }
+
+        stddev = sumOfSquares/(trials - 1);
     }
 
     // sample mean of percolation threshold
@@ -39,7 +48,9 @@ public class PercolationStats {
     }
 
     // sample standard deviation of percolation threshold
-    //public double stddev()
+    public double stddev(){
+        return Math.sqrt(stddev);
+    }
 
     // low  endpoint of 95% confidence interval
     //public double confidenceLo()
@@ -48,6 +59,8 @@ public class PercolationStats {
     //public double confidenceHi()
 
     public static void main(String[] args) {
-        PercolationStats stats = new PercolationStats(200,100);
+        PercolationStats stats = new PercolationStats(2,10000);
+        System.out.println("Mean\t" + stats.mean());
+        System.out.println("stddev:\t" + stats.stddev());
     }
 }
