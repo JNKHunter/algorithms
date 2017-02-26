@@ -65,4 +65,19 @@ public class DequeTest {
         assertEquals(true, deque.isEmpty());
     }
 
+    @Test
+    public void testSize(){
+        deque.addLast(1);
+        assertEquals(4, deque.size());
+        deque.addFirst(2);
+        assertEquals(5, deque.size());
+        deque.addFirst(3);
+        deque.addLast(3);
+        deque.removeFirst();
+        deque.removeLast();
+        deque.addLast(1);
+        deque.addFirst(2);
+        assertEquals(7, deque.size());
+    }
+
 }
