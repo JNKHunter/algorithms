@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
@@ -86,6 +87,22 @@ public class DequeTest {
         assertEquals(7, deque.size());
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void testEmptyRemoveFirst(){
+        deque.removeFirst();
+        deque.removeFirst();
+        deque.removeFirst();
+        deque.removeFirst();
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testEmptyRemoveLast(){
+        deque.removeLast();
+        deque.removeLast();
+        deque.removeLast();
+        deque.removeLast();
+    }
+
     @Test
     public void testIterator(){
         assertTrue(iterator.hasNext());
@@ -93,6 +110,14 @@ public class DequeTest {
         iterator.next();
         iterator.next();
         assertFalse(iterator.hasNext());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testIteratorEmptyNext(){
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        iterator.next();
     }
 
 }

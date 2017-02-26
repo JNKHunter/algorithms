@@ -39,6 +39,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public void enqueue(Item item) {
+        if (item == null) throw new NullPointerException();
         if (n == q.length) resize(2*q.length);
         q[last++] = item;
         if (last == q.length) last = 0;
@@ -47,6 +48,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public Item dequeue() {
 
+        if (n <= 0) throw new NoSuchElementException();
         if (isEmpty()) throw new NoSuchElementException("Queue underflow");
 
         int rand = StdRandom.uniform(first, last);
@@ -65,24 +67,41 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public Item sample() {
+        if (n <= 0) throw new NoSuchElementException();
         return q[StdRandom.uniform(first, last)];
     }
 
     public Iterator<Item> iterator() {
-        return new RandomizedQueue.RandomQueueIterator();
+        return new RandomizedQueue.RandomQueueIterator(this);
     }
 
     // an iterator, doesn't implement remove() since it's optional
     private class RandomQueueIterator implements Iterator<Item> {
-        private int i = 0;
-        public boolean hasNext()  { return i < n;                               }
+
+        private int i;
+        private int randomItemsSize;
+        private Item[] randomItems;
+
+        public RandomQueueIterator(RandomizedQueue queue){
+            i = 0;
+            randomItemsSize = queue.size();
+            randomItems = (Item[]) new Object[queue.size()];
+
+
+            for (int j = 0; j < randomItemsSize; j++){
+                randomItems[j] = (Item) queue.dequeue();
+            }
+
+            
+
+        }
+
+        public boolean hasNext() { return i < randomItemsSize; }
         public void remove()      { throw new UnsupportedOperationException();  }
 
         public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
-            Item item = q[(i + first) % q.length];
-            i++;
-            return item;
+            return randomItems[i++];
         }
     }
 }

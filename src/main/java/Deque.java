@@ -31,6 +31,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public void addFirst(Item item) {
+
         if (item == null) { throw new NullPointerException("Can't add a null item"); }
 
         if (first == null) {
@@ -51,6 +52,9 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public void addLast(Item item) {
+
+        if (item == null) { throw new NullPointerException("Can't add a null item"); }
+
         if (last == null) {
             last = new Node<Item>();
             last.next = null;
@@ -137,7 +141,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public void remove() {
-            // noop
+            throw new UnsupportedOperationException("Remove is not supported");
         }
     }
 }

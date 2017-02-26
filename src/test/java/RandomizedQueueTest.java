@@ -1,6 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.*;
 
 /**
@@ -9,6 +12,8 @@ import static org.junit.Assert.*;
 public class RandomizedQueueTest {
 
     RandomizedQueue<Integer> randomizedQueue;
+    Iterator<Integer> iter;
+
 
     @Before
     public void setUp() {
@@ -22,6 +27,8 @@ public class RandomizedQueueTest {
         randomizedQueue.enqueue(7);
         randomizedQueue.enqueue(8);
         randomizedQueue.enqueue(9);
+
+        iter = randomizedQueue.iterator();
     }
 
     @Test
@@ -29,21 +36,48 @@ public class RandomizedQueueTest {
         assertEquals(9, randomizedQueue.size());
     }
 
-    @Test
+/*    @Test
     public void testSample() throws Exception {
         System.out.println(randomizedQueue.sample());
+    }*/
+
+    @Test(expected = NullPointerException.class)
+    public void testEnqueuWithNull() {
+        randomizedQueue.enqueue(null);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testDequeueWithEmpty() {
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
     }
 
     @Test
-    public void testDequeue() throws Exception {
-        randomizedQueue.dequeue();
-        randomizedQueue.dequeue();
-        randomizedQueue.dequeue();
-        randomizedQueue.dequeue();
-        randomizedQueue.dequeue();
-        randomizedQueue.dequeue();
-        randomizedQueue.dequeue();
-        randomizedQueue.dequeue();
+    public void testIteratorHasNext(){
+        boolean truthy = iter.hasNext();
+        assertTrue(iter.hasNext());
+    }
+
+    @Test
+    public void testIteratorHasNextEmpty(){
+        iter.next();
+        iter.next();
+        iter.next();
+        iter.next();
+        iter.next();
+        iter.next();
+        iter.next();
+        iter.next();
+        iter.next();
+        assertFalse(iter.hasNext());
     }
 
 }
