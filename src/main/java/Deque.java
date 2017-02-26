@@ -139,8 +139,4 @@ public class Deque<Item> implements Iterable<Item> {
             // noop
         }
     }
-
-    public static void main(String[] args) {
-
-    }
 }

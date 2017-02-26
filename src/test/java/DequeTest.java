@@ -1,5 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 /**
@@ -8,6 +11,7 @@ import static org.junit.Assert.*;
 public class DequeTest {
 
     private Deque<Integer> deque;
+    private Iterator<Integer> iterator;
 
     @Before
     public void setUp(){
@@ -15,6 +19,8 @@ public class DequeTest {
         deque.addFirst(10);
         deque.addLast(20);
         deque.addLast(30);
+
+        iterator = deque.iterator();
     }
 
     @Test
@@ -78,6 +84,15 @@ public class DequeTest {
         deque.addLast(1);
         deque.addFirst(2);
         assertEquals(7, deque.size());
+    }
+
+    @Test
+    public void testIterator(){
+        assertTrue(iterator.hasNext());
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        assertFalse(iterator.hasNext());
     }
 
 }
