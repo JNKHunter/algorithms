@@ -29,7 +29,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         assert capacity >= n;
 
         Item[] temp = (Item[]) new Object[capacity];
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++){
             temp[i] = q[(first + i) % q.length];
         }
 
@@ -47,7 +47,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public Item dequeue() {
 
-        //TODO: Maket this random
         if (isEmpty()) throw new NoSuchElementException("Queue underflow");
         Item item = q[first];
         q[first] = null;                            // to avoid loitering
@@ -60,11 +59,24 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public Item sample() {
-        return q[StdRandom.uniform(0, n-1)];
+        return q[StdRandom.uniform(first, last)];
     }
 
-    @Override
     public Iterator<Item> iterator() {
-        return null;
+        return new RandomizedQueue.RandomQueueIterator();
+    }
+
+    // an iterator, doesn't implement remove() since it's optional
+    private class RandomQueueIterator implements Iterator<Item> {
+        private int i = 0;
+        public boolean hasNext()  { return i < n;                               }
+        public void remove()      { throw new UnsupportedOperationException();  }
+
+        public Item next() {
+            if (!hasNext()) throw new NoSuchElementException();
+            Item item = q[(i + first) % q.length];
+            i++;
+            return item;
+        }
     }
 }
