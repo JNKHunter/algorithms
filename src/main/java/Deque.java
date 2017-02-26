@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Created by jhunter on 2/25/17.
@@ -16,8 +17,9 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     private class Node<Item>{
-        public Node<Item> next;
-        public Item item;
+        private Node<Item> next;
+        private Node<Item> prev;
+        private Item item;
 
     }
 
@@ -34,6 +36,8 @@ public class Deque<Item> implements Iterable<Item> {
         first = new Node<Item>();
         first.item = item;
         first.next = oldFirst;
+        oldFirst.prev = first;
+        first.prev = null;
         n++;
     }
 
@@ -42,27 +46,40 @@ public class Deque<Item> implements Iterable<Item> {
         last = new Node<Item>();
         last.item = item;
         oldLast.next = last;
+        last.prev = oldLast;
         last.next = null;
         n++;
     }
 
     public Item removeFirst(){
         Node<Item> oldFirst = first;
-        first.next = first;
+        first = oldFirst.next;
         oldFirst.next = null;
+        first.prev = null;
         return oldFirst.item;
+    }
+
+    public Item removeLast(){
+        Node<Item> oldLast = last;
+        last = oldLast.prev;
+        last.next = null;
+        oldLast.prev = null;
+        return oldLast.item;
     }
 
     @Override
     public Iterator<Item> iterator() {
-        return null;
+        return new DequeIterator<Item>(first);
     }
 
 
+    private class DequeIterator<Item> implements Iterator<Item> {
 
+        private Node<Item> current;
 
-
-    private class DequeIterator implements Iterator<Item> {
+        public DequeIterator(Node<Item> first){
+            current = first;
+        }
 
         @Override
         public boolean hasNext() {
@@ -71,12 +88,19 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
-
+            if(!hasNext()) { throw new NoSuchElementException() }
+            Item item = current.item;
+            current = current.next;
+            return item;
         }
 
         @Override
         public void remove() {
             //noop
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }
