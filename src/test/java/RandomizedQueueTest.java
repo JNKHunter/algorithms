@@ -37,6 +37,13 @@ public class RandomizedQueueTest {
     @Test
     public void testDequeue() throws Exception {
         randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
     }
 
 }
