@@ -36,10 +36,10 @@ public class RandomizedQueueTest {
         assertEquals(9, randomizedQueue.size());
     }
 
-/*    @Test
+    @Test
     public void testSample() throws Exception {
         System.out.println(randomizedQueue.sample());
-    }*/
+    }
 
     @Test(expected = NullPointerException.class)
     public void testEnqueuWithNull() {
@@ -61,13 +61,8 @@ public class RandomizedQueueTest {
     }
 
     @Test
-    public void testIteratorHasNext(){
-        boolean truthy = iter.hasNext();
-        assertTrue(iter.hasNext());
-    }
-
-    @Test
     public void testIteratorHasNextEmpty(){
+        assertTrue(iter.hasNext());
         iter.next();
         iter.next();
         iter.next();
@@ -76,6 +71,7 @@ public class RandomizedQueueTest {
         iter.next();
         iter.next();
         iter.next();
+        assertTrue(iter.hasNext());
         iter.next();
         assertFalse(iter.hasNext());
     }

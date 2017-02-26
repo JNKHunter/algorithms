@@ -92,7 +92,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
                 randomItems[j] = (Item) queue.dequeue();
             }
 
-            
+            for (int k = 0; k < randomItemsSize; k++){
+                queue.enqueue(randomItems[k]);
+            }
 
         }
 
