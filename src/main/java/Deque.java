@@ -20,7 +20,6 @@ public class Deque<Item> implements Iterable<Item> {
         private Node<Item> next;
         private Node<Item> prev;
         private Item item;
-
     }
 
     public boolean isEmpty() {
