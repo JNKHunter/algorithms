@@ -31,6 +31,8 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public void addFirst(Item item) {
+        if (item == null) { throw new NullPointerException("Can't add a null item"); }
+
         if (first == null) {
             first = new Node<Item>();
             first.next = null;
