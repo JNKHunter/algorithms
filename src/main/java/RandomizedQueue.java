@@ -48,12 +48,18 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Item dequeue() {
 
         if (isEmpty()) throw new NoSuchElementException("Queue underflow");
-        Item item = q[first];
-        q[first] = null;                            // to avoid loitering
+
+        int rand = StdRandom.uniform(first, last);
+        Item item = q[rand];
+
+        if (rand != last-1){
+            q[rand] = q[last-1];
+        }
+
+        q[--last] = null;
         n--;
-        first++;
-        if (first == q.length) first = 0;           // wrap-around
-        // shrink size of array if necessary
+
+        if (first == q.length) first = 0;
         if (n > 0 && n == q.length/4) resize(q.length/2);
         return item;
     }

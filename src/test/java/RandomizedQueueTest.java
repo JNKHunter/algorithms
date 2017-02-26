@@ -37,8 +37,6 @@ public class RandomizedQueueTest {
     @Test
     public void testDequeue() throws Exception {
         randomizedQueue.dequeue();
-        randomizedQueue.dequeue();
-        assertEquals(3, (int) randomizedQueue.dequeue());
     }
 
 }
