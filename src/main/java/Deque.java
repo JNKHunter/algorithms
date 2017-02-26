@@ -36,7 +36,13 @@ public class Deque<Item> implements Iterable<Item> {
         first = new Node<Item>();
         first.item = item;
         first.next = oldFirst;
-        oldFirst.prev = first;
+        first.prev = null;
+        if (oldFirst != null){
+            oldFirst.prev = first;
+        } else {
+            last = first;
+        }
+
         first.prev = null;
         n++;
     }
@@ -45,18 +51,33 @@ public class Deque<Item> implements Iterable<Item> {
         Node<Item> oldLast = last;
         last = new Node<Item>();
         last.item = item;
-        oldLast.next = last;
         last.prev = oldLast;
         last.next = null;
+        if (oldLast != null){
+            oldLast.next = last;
+        } else {
+            first = last;
+        }
+
         n++;
     }
 
     public Item removeFirst(){
-        Node<Item> oldFirst = first;
-        first = oldFirst.next;
-        oldFirst.next = null;
-        first.prev = null;
-        return oldFirst.item;
+        if (first == null){
+            throw new NoSuchElementException();
+        } else {
+            Node<Item> oldFirst = first;
+            first = oldFirst.next;
+            oldFirst.next = null;
+
+            if (first != null){
+                first.prev = null;
+            }
+
+            --n;
+
+            return oldFirst.item;
+        }
     }
 
     public Item removeLast(){
@@ -64,6 +85,7 @@ public class Deque<Item> implements Iterable<Item> {
         last = oldLast.prev;
         last.next = null;
         oldLast.prev = null;
+        --n;
         return oldLast.item;
     }
 
@@ -88,14 +110,14 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
-            if(!hasNext()) { throw new NoSuchElementException() }
+            if (!hasNext()) { throw new NoSuchElementException(); }
             Item item = current.item;
             current = current.next;
             return item;
         }
 
         @Override
-        public void remove() {
+        public void remove() {  
             //noop
         }
     }
