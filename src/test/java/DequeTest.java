@@ -28,4 +28,41 @@ public class DequeTest {
         assertEquals(30, (int) deque.removeLast());
     }
 
+    @Test
+    public void testIsEmptyRemovingLast(){
+        deque.removeLast();
+        deque.removeLast();
+        deque.removeLast();
+        assertEquals(true, deque.isEmpty());
+    }
+
+    @Test
+    public void testIsEmptyRemovingFirst(){
+        deque.removeFirst();
+        deque.removeFirst();
+        deque.removeFirst();
+        assertEquals(true, deque.isEmpty());
+    }
+
+    @Test
+    public void testIsNotEmplty(){
+        assertEquals(false, deque.isEmpty());
+    }
+
+    @Test
+    public void testIsEmptyRemovingFirstAndLastAndAdding(){
+        deque.addFirst(13);
+        deque.addLast(15);
+        deque.removeFirst();
+        deque.removeLast();
+        deque.removeFirst();
+        deque.removeFirst();
+        deque.addFirst(15);
+        deque.removeLast();
+        deque.addLast(15);
+        deque.removeLast();
+        deque.removeFirst();
+        assertEquals(true, deque.isEmpty());
+    }
+
 }

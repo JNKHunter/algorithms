@@ -32,32 +32,37 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public void addFirst(Item item){
-        Node<Item> oldFirst = first;
-        first = new Node<Item>();
-        first.item = item;
-        first.next = oldFirst;
-        first.prev = null;
-        if (oldFirst != null){
-            oldFirst.prev = first;
-        } else {
+        if (first == null){
+            first = new Node<Item>();
+            first.next = null;
             last = first;
+        } else {
+            Node<Item> oldFirst = first;
+            first = new Node<Item>();
+            first.next = oldFirst;
+            oldFirst.prev = first;
         }
 
+        first.item = item;
         first.prev = null;
+
         n++;
     }
 
     public void addLast(Item item){
-        Node<Item> oldLast = last;
-        last = new Node<Item>();
-        last.item = item;
-        last.prev = oldLast;
-        last.next = null;
-        if (oldLast != null){
-            oldLast.next = last;
-        } else {
+        if (last == null){
+            last = new Node<Item>();
+            last.next = null;
             first = last;
+        } else {
+            Node<Item> oldLast = last;
+            last = new Node<Item>();
+            last.prev = oldLast;
+            oldLast.next = last;
         }
+
+        last.item = item;
+        last.next = null;
 
         n++;
     }
@@ -72,6 +77,8 @@ public class Deque<Item> implements Iterable<Item> {
 
             if (first != null){
                 first.prev = null;
+            } else {
+                last = null;
             }
 
             --n;
@@ -81,12 +88,23 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public Item removeLast(){
-        Node<Item> oldLast = last;
-        last = oldLast.prev;
-        last.next = null;
-        oldLast.prev = null;
-        --n;
-        return oldLast.item;
+
+        if (last == null){
+           throw new NoSuchElementException();
+        } else {
+            Node<Item> oldLast = last;
+            last = oldLast.prev;
+            oldLast.prev = null;
+
+            if (last != null){
+                last.next = null;
+            }else{
+                first = null;
+            }
+
+            --n;
+            return oldLast.item;
+        }
     }
 
     @Override
@@ -117,7 +135,7 @@ public class Deque<Item> implements Iterable<Item> {
         }
 
         @Override
-        public void remove() {  
+        public void remove() {
             //noop
         }
     }
