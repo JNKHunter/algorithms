@@ -29,7 +29,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         assert capacity >= n;
 
         Item[] temp = (Item[]) new Object[capacity];
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             temp[i] = q[(first + i) % q.length];
         }
 
@@ -42,7 +42,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (item == null) throw new NullPointerException();
         if (n == q.length) resize(2*q.length);
         q[last++] = item;
-        if (last == q.length) last = 0;
         n++;
     }
 
@@ -54,7 +53,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int rand = StdRandom.uniform(first, last);
         Item item = q[rand];
 
-        if (rand != last-1){
+        if (rand != last-1) {
             q[rand] = q[last-1];
         }
 
@@ -75,24 +74,23 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         return new RandomizedQueue.RandomQueueIterator(this);
     }
 
-    // an iterator, doesn't implement remove() since it's optional
     private class RandomQueueIterator implements Iterator<Item> {
 
         private int i;
         private int randomItemsSize;
         private Item[] randomItems;
 
-        public RandomQueueIterator(RandomizedQueue queue){
+        public RandomQueueIterator(RandomizedQueue queue) {
             i = 0;
             randomItemsSize = queue.size();
             randomItems = (Item[]) new Object[queue.size()];
 
 
-            for (int j = 0; j < randomItemsSize; j++){
+            for (int j = 0; j < randomItemsSize; j++) {
                 randomItems[j] = (Item) queue.dequeue();
             }
 
-            for (int k = 0; k < randomItemsSize; k++){
+            for (int k = 0; k < randomItemsSize; k++) {
                 queue.enqueue(randomItems[k]);
             }
 
