@@ -5,25 +5,25 @@ public class AST {
 
 
 
-    public Float evalutate(ASTNode node){
+    public float evaluate(ASTNode node){
         if (node.value != null){
             return node.value;
         }
 
         if (node.operation.equals("+")){
-            return evalutate(node.leftNode) + evalutate(node.rightNode);
+            return evaluate(node.leftNode) + evaluate(node.rightNode);
         }
 
         if (node.operation.equals("-")){
-            return evalutate(node.leftNode) - evalutate(node.rightNode);
+            return evaluate(node.leftNode) - evaluate(node.rightNode);
         }
 
         if (node.operation.equals("/")){
-            return evalutate(node.leftNode) / evalutate(node.rightNode);
+            return evaluate(node.leftNode) / evaluate(node.rightNode);
         }
 
         if (node.operation.equals("*")){
-            return evalutate(node.leftNode) / evalutate(node.rightNode);
+            return evaluate(node.leftNode) * evaluate(node.rightNode);
         }
 
         return 0.0f;
@@ -38,7 +38,7 @@ public class AST {
         ASTNode plusNode = new ASTNode("+", multiplyNode, node5, null);
 
         AST tree = new AST();
-        System.out.println(tree.evalutate(plusNode);
+        System.out.println(tree.evaluate(plusNode));
     }
 
 }
