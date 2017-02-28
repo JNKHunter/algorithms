@@ -38,7 +38,7 @@ public class AST {
         ASTNode plusNode = new ASTNode("+", multiplyNode, node5, null);
 
         AST tree = new AST();
-        System.out.println(tree
+        System.out.println(tree.evalutate(plusNode);
     }
 
 }
