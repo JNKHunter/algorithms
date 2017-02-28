@@ -2,6 +2,7 @@ import edu.princeton.cs.algs4.StdRandom;
 
 /**
  * Created by jhunter on 2/26/17.
+ * A simple way to shuffle an array randomly
  */
 public class ArraySwap {
 
@@ -22,6 +23,10 @@ public class ArraySwap {
     }
 
     public static void main(String[] args) {
-
+        Integer[] ints = {1,2,3,4,5,6,7,8,9,10};
+        shuffle(ints);
+        for(int i : ints){
+            System.out.println(i);
+        }
     }
 }
