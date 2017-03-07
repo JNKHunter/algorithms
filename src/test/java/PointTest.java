@@ -18,7 +18,6 @@ public class PointTest {
     public void setUp(){
         point  = new Point(1,1);
         zeroSlopePoint = new Point(5,1);
-        zeroSlopePoint = new Point(5,1);
         infiniteSlopePoint = new Point (1,5);
         equalPoint = new Point(1, 1);
         originPoint = new Point(0,0);
@@ -27,7 +26,10 @@ public class PointTest {
 
     @Test
     public void testSlopeTo() throws Exception {
-
+        assertEquals(Double.POSITIVE_INFINITY, point.slopeTo(infiniteSlopePoint), 0.0f);
+        assertEquals(Double.NEGATIVE_INFINITY, point.slopeTo(equalPoint), 0.0f);
+        assertEquals(+0.0f, point.slopeTo(zeroSlopePoint), 0.0f);
+        assertEquals(+1.0f, point.slopeTo(originPoint), 0.0f);
     }
 
     @Test

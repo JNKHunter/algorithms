@@ -53,10 +53,24 @@ public class Point implements Comparable<Point> {
      * @param  that the other point
      * @return the slope between this point and the specified point
      */
-/*    public double slopeTo(Point that) {
-        double slope = (that.y - this.y) / (that.x - this.x);
+    public double slopeTo(Point that) {
 
-    }*/
+        if (that.x - this.x == 0.0f && that.y - this.y == 0.0f) {
+            return Double.NEGATIVE_INFINITY;
+        }
+
+        if (that.x - this.x == 0.0f){
+            return Double.POSITIVE_INFINITY;
+        }
+
+        if (that.y - this.y == 0.0f) {
+            return +0.0f;
+        }
+
+        double slope = (that.y - this.y) / (that.x - this.x);
+        return slope;
+
+    }
 
     /**
      * Compares two points by y-coordinate, breaking ties by x-coordinate.
