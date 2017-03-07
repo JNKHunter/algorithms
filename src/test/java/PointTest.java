@@ -12,6 +12,7 @@ public class PointTest {
     private Point zeroSlopePoint;
     private Point infiniteSlopePoint;
     private Point equalPoint;
+    private Point originPoint;
 
     @Before
     public void setUp(){
@@ -20,6 +21,7 @@ public class PointTest {
         zeroSlopePoint = new Point(5,1);
         infiniteSlopePoint = new Point (1,5);
         equalPoint = new Point(1, 1);
+        originPoint = new Point(0,0);
     }
 
 
@@ -31,6 +33,8 @@ public class PointTest {
     @Test
     public void testCompareTo() throws Exception {
         assertEquals(0, point.compareTo(equalPoint));
+        assertEquals(-1, point.compareTo(infiniteSlopePoint));
+        assertEquals(1, point.compareTo(originPoint));
     }
 
 }
