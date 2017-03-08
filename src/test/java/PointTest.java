@@ -24,6 +24,8 @@ public class PointTest {
     private Point sTest6;
     private Point sTest7;
     private Point sTest8;
+    private Point sTest9;
+    private Point sTest10;
 
     @Before
     public void setUp(){
@@ -43,10 +45,14 @@ public class PointTest {
         sTest3 = new Point(3,3);
         sTest4 = new Point(4,4);
 
+        //non straight line
         sTest5 = new Point(30,2);
         sTest6 = new Point(52,5);
         sTest7 = new Point(92,9);
         sTest8 = new Point(190,10);
+
+        sTest9 = new Point(8,8);
+        sTest10 = new Point(12,12);
     }
 
 
