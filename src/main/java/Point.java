@@ -67,7 +67,7 @@ public class Point implements Comparable<Point> {
             return +0.0f;
         }
 
-        double slope = (that.y - this.y) / (that.x - this.x);
+        double slope = (double) (that.y - this.y) / (that.x - this.x);
         return slope;
 
     }

@@ -16,6 +16,14 @@ public class PointTest {
     private Point zeroSlopePointFurther;
     private Point highSlopePoint;
     private Point lowSlopePoint;
+    private Point sTest1;
+    private Point sTest2;
+    private Point sTest3;
+    private Point sTest4;
+    private Point sTest5;
+    private Point sTest6;
+    private Point sTest7;
+    private Point sTest8;
 
     @Before
     public void setUp(){
@@ -27,6 +35,18 @@ public class PointTest {
         infiniteSlopePoint = new Point (1,5);
         equalPoint = new Point(1, 1);
         originPoint = new Point(0,0);
+
+        // Segments test
+        // Straight line
+        sTest1 = new Point(1,1);
+        sTest2 = new Point(2,2);
+        sTest3 = new Point(3,3);
+        sTest4 = new Point(4,4);
+
+        sTest5 = new Point(30,2);
+        sTest6 = new Point(52,5);
+        sTest7 = new Point(92,9);
+        sTest8 = new Point(190,10);
     }
 
 
@@ -50,6 +70,13 @@ public class PointTest {
         assertEquals(0, point.slopeOrder().compare(zeroSlopePoint, zeroSlopePointFurther));
         assertEquals(1, point.slopeOrder().compare(highSlopePoint, lowSlopePoint));
         assertEquals(-1, point.slopeOrder().compare(lowSlopePoint, highSlopePoint));
+    }
+
+    @Test
+    public void testSegments() throws Exception {
+        Point[] linearPoints = {sTest1, sTest2, sTest3, sTest4, sTest5, sTest6, sTest7, sTest8};
+        BruteCollinearPoints bruteCollinearPoints = new BruteCollinearPoints(linearPoints);
+        assertEquals(1,bruteCollinearPoints.numberOfSegments());
     }
 
 }
