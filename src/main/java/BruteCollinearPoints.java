@@ -35,6 +35,7 @@ public class BruteCollinearPoints {
                        slopeik = points[i].slopeTo(points[k]);
                        slopeil = points[i].slopeTo(points[l]);
 
+
                        if ((slopeij == slopeik) && (slopeij == slopeil)){
                            segments = Arrays.copyOf(segments, segments.length + 1);
                            segments[segments.length - 1] = new LineSegment(points[i], points[l]);
