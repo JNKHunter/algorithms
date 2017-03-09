@@ -46,6 +46,7 @@ public class PointTest {
         sTest2 = new Point(2,2);
         sTest3 = new Point(3,3);
         sTest4 = new Point(4,4);
+        sTest4 = new Point(5,5);
 
         //non straight line
         sTest5 = new Point(30,2);
@@ -88,6 +89,15 @@ public class PointTest {
                 sTest6, sTest7, sTest8, sTest9, sTest10, sTest11, sTest12};
         BruteCollinearPoints bruteCollinearPoints = new BruteCollinearPoints(linearPoints);
         assertEquals(2,bruteCollinearPoints.numberOfSegments());
+    }
+
+    @Test
+    public void testFastSegments() throws Exception {
+        Point[] linearPoints = {sTest1, sTest2, sTest3, sTest4, sTest5,
+                sTest6, sTest7, sTest8, sTest9, sTest10, sTest11, sTest12};
+
+        FastCollinearPoints fastCollinearPoints = new FastCollinearPoints(linearPoints);
+        assertEquals(2, fastCollinearPoints.numberOfSegments());
     }
 
 }
