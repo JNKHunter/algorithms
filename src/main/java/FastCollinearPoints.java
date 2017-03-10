@@ -16,10 +16,12 @@ public class FastCollinearPoints {
         }
 
         segments = new LineSegment[0];
+        existingSlopes = new double[0];
         int numCollinear = 0;
         int pointer = 1;
         boolean tryNext = true;
         int counter = 0;
+        sortedPoints = Arrays.copyOf(points, points.length);
 
         Double currentSlope = null;
         Double previousSlope = null;
@@ -28,45 +30,37 @@ public class FastCollinearPoints {
         // TODO keep list of already checked slopes. If slope already exists, do not add it
 
         for (int i = 0; i < points.length - 3; i++){
-            sortedPoints = Arrays.copyOf(points, points.length);
             Arrays.sort(sortedPoints, points[i].slopeOrder());
 
-            for (int j = i+1; j < points.length; j++){
-                if (currentSlope == null) {
-                    currentSlope = points[i].slopeTo(sortedPoints[j]);
+            for (int j = 0; j < points.length; j++){
+
+                previousSlope = currentSlope;
+                currentSlope = points[i].slopeTo(sortedPoints[j]);
+
+                /* for (int k = 0; k < existingSlopes.length; k++) {
+                    if (previousSlope == existingSlopes[k]){
+                        continue;
+                    }
+                }*/
+
+                if (currentSlope.equals(previousSlope)){
+                    numberOfPointsInCurrentSegment += 1;
+                    currentEndpoint = sortedPoints[j];
                 } else {
 
-                    previousSlope = currentSlope;
-                    currentSlope = points[i].slopeTo(sortedPoints[j]);
+                    if (numberOfPointsInCurrentSegment > 3){
 
-                    if (currentSlope.equals(previousSlope)){
-                        numberOfPointsInCurrentSegment += 1;
-                        currentEndpoint = sortedPoints[j];
+                        segments = Arrays.copyOf(segments, segments.length + 1);
+                        segments[segments.length - 1] = new LineSegment(sortedPoints[i], currentEndpoint);
+
+                        existingSlopes = Arrays.copyOf(existingSlopes, existingSlopes.length + 1);
+                        existingSlopes[existingSlopes.length - 1] = previousSlope;
+                        numberOfPointsInCurrentSegment = 2;
+
                     } else {
-
-                        if (numberOfPointsInCurrentSegment > 3){
-
-                            boolean exists = false;
-                            LineSegment segmentToAdd = new LineSegment(sortedPoints[i], currentEndpoint);
-
-                            for (LineSegment segment : segments) {
-                                if (segment.toString().equals(segmentToAdd.toString())) {
-                                    exists = true;
-                                }
-                            }
-
-                            if (exists) {
-                                continue;
-                            }
-                            segments = Arrays.copyOf(segments, segments.length + 1);
-                            segments[segments.length - 1] = new LineSegment(sortedPoints[i], currentEndpoint);
-                            numberOfPointsInCurrentSegment = 2;
-
-                        } else {
-                            currentSlope = null;
-                            previousSlope = null;
-                            numberOfPointsInCurrentSegment = 2;
-                        }
+                        currentSlope = null;
+                        previousSlope = null;
+                        numberOfPointsInCurrentSegment = 2;
                     }
                 }
             }
