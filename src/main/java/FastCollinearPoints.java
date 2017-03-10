@@ -34,8 +34,12 @@ public class FastCollinearPoints {
 
             for (int j = 0; j < points.length; j++){
 
-                previousSlope = currentSlope;
-                currentSlope = points[i].slopeTo(sortedPoints[j]);
+                if (currentSlope == null) {
+                    currentSlope = points[i].slopeTo(sortedPoints[j]);
+                } else {
+                    previousSlope = currentSlope;
+                    currentSlope = points[i].slopeTo(sortedPoints[j]);
+                }
 
                 /* for (int k = 0; k < existingSlopes.length; k++) {
                     if (previousSlope == existingSlopes[k]){
