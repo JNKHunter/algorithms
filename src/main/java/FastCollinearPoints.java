@@ -7,6 +7,7 @@ import java.util.Arrays;
 public class FastCollinearPoints {
     private LineSegment[] segments;
     private Point[] sortedPoints;
+    private double[] existingSlopes;
 
     public FastCollinearPoints(Point[] points) {
 
@@ -24,6 +25,7 @@ public class FastCollinearPoints {
         Double previousSlope = null;
         int numberOfPointsInCurrentSegment = 2;
         Point currentEndpoint = null;
+        // TODO keep list of already checked slopes. If slope already exists, do not add it
 
         for (int i = 0; i < points.length - 3; i++){
             sortedPoints = Arrays.copyOf(points, points.length);
