@@ -28,6 +28,11 @@ public class PointTest {
     private Point sTest10;
     private Point sTest11;
     private Point sTest12;
+    private Point sTest13;
+    private Point sTest14;
+    private Point sTest15;
+    private Point sTest16;
+    private Point sTest17;
 
     @Before
     public void setUp(){
@@ -58,6 +63,12 @@ public class PointTest {
         sTest10 = new Point(2,4);
         sTest11 = new Point(3, 6);
         sTest12 = new Point(4, 8);
+
+        sTest13 = new Point(1,15);
+        sTest14 = new Point(2,30);
+        sTest15 = new Point(3, 45);
+        sTest17 = new Point(5,1234);
+        sTest16 = new Point(4, 60);
     }
 
 
@@ -86,18 +97,18 @@ public class PointTest {
     @Test
     public void testSegments() throws Exception {
         Point[] linearPoints = {sTest1, sTest2, sTest3, sTest4, sTest5,
-                sTest6, sTest7, sTest8, sTest9, sTest10, sTest11, sTest12};
+                sTest6, sTest7, sTest8, sTest9, sTest10, sTest11, sTest12, sTest13, sTest14, sTest15, sTest16, sTest17};
         BruteCollinearPoints bruteCollinearPoints = new BruteCollinearPoints(linearPoints);
-        assertEquals(2,bruteCollinearPoints.numberOfSegments());
+        assertEquals(3,bruteCollinearPoints.numberOfSegments());
     }
 
     @Test
     public void testFastSegments() throws Exception {
         Point[] linearPoints = {sTest1, sTest2, sTest3, sTest4, sTest5,
-                sTest6, sTest7, sTest8, sTest9, sTest10, sTest11, sTest12};
+                sTest6, sTest7, sTest8, sTest9, sTest10, sTest11, sTest12, sTest13, sTest14, sTest15, sTest16, sTest17};
 
         FastCollinearPoints fastCollinearPoints = new FastCollinearPoints(linearPoints);
-        assertEquals(2, fastCollinearPoints.numberOfSegments());
+        assertEquals(3, fastCollinearPoints.numberOfSegments());
     }
 
 }
