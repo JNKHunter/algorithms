@@ -10,8 +10,12 @@ public class BruteCollinearPoints {
 
     private Point[] points;
     private LineSegment[] segments;
+    private int numberOfSegments;
 
     public BruteCollinearPoints(Point[] points) {
+
+        numberOfSegments = 0;
+
         if (points == null) {
             throw new NullPointerException("Point array cannot be null");
         }
@@ -36,15 +40,36 @@ public class BruteCollinearPoints {
 
         segments = new LineSegment[0];
 
-        for (int i = 0; i < points.length - 3; i++) {
-            for (int j = i+1; j < points.length - 2; j++) {
-                for (int k = j+1; k < points.length - 1; k++) {
+        boolean duplicate = false;
+        for (int i = 0; i < points.length; i++) {
+            for (int j = i+1; j < points.length; j++) {
+                if (points[i].compareTo(points[j]) == 0) {
+                    throw new IllegalArgumentException("Duplicate points not allowed");
+                }
+
+                for (int k = j+1; k < points.length; k++) {
+                    if (points[i].compareTo(points[k]) == 0) {
+                        throw new IllegalArgumentException("Duplicate points not allowed");
+                    }
+
+                    if (points[j].compareTo(points[k]) == 0) {
+                        throw new IllegalArgumentException("Duplicate points not allowed");
+                    }
+
                     for (int l = k+1; l < points.length; l++) {
 
-                        if (points[k].compareTo(points[i]) == 0) {
+                        if (points[i].compareTo(points[l]) == 0) {
+                            throw new IllegalArgumentException("Duplicate points not allowed");
+                        }
 
-                           throw new IllegalArgumentException("Duplicate points not allowed");
-                       }
+
+                        if (points[j].compareTo(points[l]) == 0) {
+                            throw new IllegalArgumentException("Duplicate points not allowed");
+                        }
+
+                        if (points[k].compareTo(points[l]) == 0) {
+                            throw new IllegalArgumentException("Duplicate points not allowed");
+                        }
 
                        slopeij = points[i].slopeTo(points[j]);
                        slopeik = points[i].slopeTo(points[k]);
@@ -68,6 +93,8 @@ public class BruteCollinearPoints {
 
                            segments = Arrays.copyOf(segments, segments.length + 1);
                            segments[segments.length - 1] = new LineSegment(segmentPoints.get(0), segmentPoints.get(segmentPoints.size()-1));
+
+                           numberOfSegments += 1;
                        }
                     }
                 }
@@ -76,7 +103,7 @@ public class BruteCollinearPoints {
     }
 
     public int numberOfSegments() {
-        return segments.length;
+        return numberOfSegments;
     }
 
     public LineSegment[] segments() {

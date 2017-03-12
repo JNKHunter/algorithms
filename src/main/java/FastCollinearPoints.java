@@ -20,7 +20,7 @@ public class FastCollinearPoints {
         int numberOfPointsInCurrentSegment = 2;
         Point currentEndpoint = null;
 
-        for (int i = 0; i < points.length - 3; i++) {
+        for (int i = 0; i < points.length; i++) {
             Arrays.sort(sortedPoints, points[i].slopeOrder());
 
             for (int j = 0; j < points.length; j++) {
