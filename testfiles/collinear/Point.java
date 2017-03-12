@@ -1,6 +1,13 @@
-/**
- * Created by jhunter on 3/6/17.
- */
+/******************************************************************************
+ *  Compilation:  javac Point.java
+ *  Execution:    java Point
+ *  Dependencies: none
+ *  
+ *  An immutable data type for points in the plane.
+ *  For use on Coursera, Algorithms Part I programming assignment.
+ *
+ ******************************************************************************/
+
 import java.util.Comparator;
 import edu.princeton.cs.algs4.StdDraw;
 
@@ -52,22 +59,7 @@ public class Point implements Comparable<Point> {
      * @return the slope between this point and the specified point
      */
     public double slopeTo(Point that) {
-
-        if (that.x - this.x == 0.0f && that.y - this.y == 0.0f) {
-            return Double.NEGATIVE_INFINITY;
-        }
-
-        if (that.x - this.x == 0.0f) {
-            return Double.POSITIVE_INFINITY;
-        }
-
-        if (that.y - this.y == 0.0f) {
-            return +0.0f;
-        }
-
-        double slope = (double) (that.y - this.y) / (that.x - this.x);
-        return slope;
-
+        /* YOUR CODE HERE */
     }
 
     /**
@@ -83,25 +75,7 @@ public class Point implements Comparable<Point> {
      *         argument point
      */
     public int compareTo(Point that) {
-        if (this.y > that.y) {
-            return 1;
-        }
-
-        if (this.y < that.y) {
-            return -1;
-        }
-
-        if (this.y == that.y) {
-            if (this.x > that.x) {
-                return 1;
-            }
-
-            if (this.x < that.x) {
-                return -1;
-            }
-        }
-
-        return 0;
+        /* YOUR CODE HERE */
     }
 
     /**
@@ -111,23 +85,7 @@ public class Point implements Comparable<Point> {
      * @return the Comparator that defines this ordering on points
      */
     public Comparator<Point> slopeOrder() {
-        Point thiss = this;
-        return new Comparator<Point>() {
-            @Override
-            public int compare(Point p1, Point p2) {
-                double p1Slope = thiss.slopeTo(p1);
-                double p2Slope = thiss.slopeTo(p2);
-                if (p1Slope > p2Slope) {
-                    return 1;
-                }
-
-                if (p1Slope < p2Slope) {
-                    return -1;
-                }
-
-                return 0;
-            }
-        };
+        /* YOUR CODE HERE */
     }
 
 

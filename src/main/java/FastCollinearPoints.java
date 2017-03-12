@@ -1,9 +1,5 @@
-import edu.princeton.cs.algs4.Stack;
-
 import java.util.Arrays;
-/**
- * Created by jhunter on 3/8/17.
- */
+
 public class FastCollinearPoints {
     private LineSegment[] segments;
     private Point[] sortedPoints;
@@ -24,10 +20,10 @@ public class FastCollinearPoints {
         int numberOfPointsInCurrentSegment = 2;
         Point currentEndpoint = null;
 
-        for (int i = 0; i < points.length - 3; i++){
+        for (int i = 0; i < points.length - 3; i++) {
             Arrays.sort(sortedPoints, points[i].slopeOrder());
 
-            for (int j = 0; j < points.length; j++){
+            for (int j = 0; j < points.length; j++) {
 
                 if (currentSlope == null) {
                     currentSlope = points[i].slopeTo(sortedPoints[j]);
@@ -35,25 +31,24 @@ public class FastCollinearPoints {
                     previousSlope = currentSlope;
                     currentSlope = points[i].slopeTo(sortedPoints[j]);
 
-                    if (currentSlope.equals(previousSlope)){
+                    if (currentSlope.equals(previousSlope)) {
                         numberOfPointsInCurrentSegment += 1;
                         currentEndpoint = sortedPoints[j];
                     } else {
 
-                        if (numberOfPointsInCurrentSegment > 3){
+                        if (numberOfPointsInCurrentSegment > 3) {
 
                             boolean exists = false;
 
-                            for (int k = 0; k < existingSlopes.length; k++ ) {
-                                if (existingSlopes[k] == previousSlope){
+                            for (int k = 0; k < existingSlopes.length; k++) {
+                                if (existingSlopes[k] == previousSlope) {
                                     exists = true;
                                 }
                             }
 
                             numberOfPointsInCurrentSegment = 2;
 
-                            if (exists){
-                                j = points.length;
+                            if (exists) {
                                 continue;
                             } else {
                                 segments = Arrays.copyOf(segments, segments.length + 1);
@@ -72,11 +67,11 @@ public class FastCollinearPoints {
         }
     }
 
-    public int numberOfSegments(){
+    public int numberOfSegments() {
         return segments.length;
     }
 
-    public LineSegment[] segments(){
+    public LineSegment[] segments() {
         return segments;
     }
 }
