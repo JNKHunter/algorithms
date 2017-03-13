@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by jhunter on 3/12/17.
  */
-public class FastCollinearPoints {
+public class FastCollinearPoints2 {
 
     private Point[] sortedPoints;
     private LineSegment[] segments;
@@ -13,7 +13,7 @@ public class FastCollinearPoints {
     private List<Double> existingSlopes;
 
 
-    public FastCollinearPoints(Point[] points){
+    public FastCollinearPoints2(Point[] points){
 
         if (points == null) {
             throw new NullPointerException("Point array cannot be null");
