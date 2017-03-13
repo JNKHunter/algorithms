@@ -29,7 +29,7 @@ public class CollinearPointsClient {
         StdDraw.show();
 
         // print and draw the line segments
-        FastCollinearPoints2 collinear = new FastCollinearPoints2(points);
+        FastCollinearPoints collinear = new FastCollinearPoints(points);
 //        BruteCollinearPoints collinear = new BruteCollinearPoints(points);
         for (LineSegment segment : collinear.segments()) {
             StdOut.println(segment);
