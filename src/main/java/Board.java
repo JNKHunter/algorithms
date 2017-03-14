@@ -8,7 +8,7 @@ public class Board {
     }
 
     public Board twin() {
-
+        return null;
     }
 
     public int dimension() {
@@ -31,9 +31,9 @@ public class Board {
         return false;
     }
 
-    /*public Iterable<Board> neighbors() {
-
-    }*/
+    public Iterable<Board> neighbors() {
+        return null;
+    }
 
     public String toString() {
         return this.toString();
