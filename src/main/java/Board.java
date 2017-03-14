@@ -3,8 +3,12 @@
  */
 public class Board {
 
-    public Board(int[][] blocks) {
+    int[][] blocks;
+    int dimension;
 
+    public Board(int[][] blocks) {
+        this.blocks = blocks;
+        dimension = blocks.length;
     }
 
     public Board twin() {
@@ -12,7 +16,7 @@ public class Board {
     }
 
     public int dimension() {
-        return 0;
+        return dimension;
     }
 
     public int hamming() {
