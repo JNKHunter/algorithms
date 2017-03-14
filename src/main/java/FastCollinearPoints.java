@@ -53,26 +53,26 @@ public class FastCollinearPoints {
                             }
                         }
 
-                        segments = Arrays.copyOf(segments, segments.length + 1);
-                        segments[segments.length - 1] = new LineSegment(smallest,
-                                biggest);
+                        LineSegment segmentToAdd = new LineSegment(smallest, biggest);
 
-                        //existingSlopes.add(slopes[rightPointer - 1]);
+                        boolean duplicate = false;
+                        for (int l = 0; l < segments.length; l++){
+                            if (segmentToAdd.toString().equals(segments[l].toString())){
+                                duplicate = true;
+                            }
+                        }
 
-                       /* if (!existingSlopes.contains(slopes[leftPointer])){
+                        if (!duplicate){
                             segments = Arrays.copyOf(segments, segments.length + 1);
                             segments[segments.length - 1] = new LineSegment(smallest,
                                     biggest);
-
-                            existingSlopes.add(slopes[rightPointer - 1]);
-                        }*/
+                        }
                     }
                     leftPointer = rightPointer;
                 }
                 rightPointer += 1;
             }
 
-            //One last check before we enter the next iteration
             if ((rightPointer - 1) - leftPointer >= 2) {
 
                 Point biggest = points[i];
@@ -87,11 +87,23 @@ public class FastCollinearPoints {
                     }
                 }
 
-                segments = Arrays.copyOf(segments, segments.length + 1);
-                segments[segments.length - 1] = new LineSegment(smallest,
-                        biggest);
+                LineSegment segmentToAdd = new LineSegment(smallest, biggest);
+
+                boolean duplicate = false;
+                for (int l = 0; l < segments.length; l++){
+                    if (segmentToAdd.toString().equals(segments[l].toString())){
+                        duplicate = true;
+                    }
+                }
+
+                if (!duplicate){
+                    segments = Arrays.copyOf(segments, segments.length + 1);
+                    segments[segments.length - 1] = new LineSegment(smallest,
+                            biggest);
+                }
             }
         }
+        int asdfadsf = 1;
     }
 
     public int numberOfSegments() {
