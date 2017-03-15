@@ -78,7 +78,18 @@ public class Board {
     }
 
     public boolean equals(Object y) {
-        return false;
+        if (this.dimension() != ((Board) y).dimension()){
+            return false;
+        }
+
+        for (int i = 0; i < blocks.length; i++) {
+            for (int j = 0; j < blocks[i].length; j++) {
+                if (blocks[i][j] != ((Board) y).blocks[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public Iterable<Board> neighbors() {
