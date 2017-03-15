@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.StdRandom;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +29,15 @@ public class Board {
     }
 
     public Board twin() {
-        return null;
+        int[][] twin = cloneBlocks();
+        int randomRow1 = StdRandom.uniform(0, dimension());
+        int randomCol1 = StdRandom.uniform(0, dimension());
+        int randomRow2 = StdRandom.uniform(0, dimension());
+        int randomCol2 = StdRandom.uniform(0, dimension());
+        int tmp = twin[randomRow1][randomCol1];
+        twin[randomRow1][randomCol1] = twin[randomRow2][randomCol2];
+        twin[randomRow2][randomCol2] = tmp;
+        return new Board(twin);
     }
 
     public int dimension() {
@@ -110,13 +120,6 @@ public class Board {
     public Iterable<Board> neighbors() {
 
         List<Board> neighbors = new ArrayList<>();
-
-        // Create new board
-        int[][] tmpArray = new int[blocks.length][];
-
-        for (int a = 0; a < blocks.length; a++) {
-            tmpArray[a] = blocks[a].clone();
-        }
 
         if (!(zeroPosition[0] == 0)) {
             int[][] topNeighbor = cloneBlocks();
