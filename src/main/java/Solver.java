@@ -13,7 +13,9 @@ public class Solver {
     private Board previous;
 
     private MinPQ<Board> queue;
+    private MinPQ<Board> queueTwin;
     private List<Board> gameTree;
+    private boolean isSolvable;
 
     public Solver(Board initial) {
 
@@ -22,16 +24,7 @@ public class Solver {
         if (initial == null) {
             throw new NullPointerException("Initial board can not be null");
         }
-        queue = new MinPQ<>(0, new Comparator<Board>() {
-            @Override
-            public int compare(Board board, Board t1) {
-
-                if (board.manhattan() + moves > t1.manhattan() + moves) return 1;
-                if (board.manhattan() + moves < t1.manhattan() + moves) return -1;
-
-                return 0;
-            }
-        });
+        queue = getQueue();
 
         gameTree = new ArrayList<>();
 
@@ -56,8 +49,21 @@ public class Solver {
         gameTree.add(searchNode);
     }
 
+    private MinPQ<Board> getQueue() {
+        return new MinPQ<>(0, new Comparator<Board>() {
+            @Override
+            public int compare(Board board, Board t1) {
+
+                if (board.manhattan() + moves > t1.manhattan() + moves) return 1;
+                if (board.manhattan() + moves < t1.manhattan() + moves) return -1;
+
+                return 0;
+            }
+        });
+    }
+
     public boolean isSolvabale() {
-        return false;
+        return isSolvable;
     }
 
     public int moves() {
