@@ -108,27 +108,8 @@ public class Board {
     }
 
     public Iterable<Board> neighbors() {
-        boolean isTop = false;
-        boolean isBottom = false;
-        boolean isLeft = false;
-        boolean isRight = false;
+
         List<Board> neighbors = new ArrayList<>();
-
-        if (zeroPosition[0] == 0) {
-            isTop = true;
-        }
-
-        if (zeroPosition[0] == blocks.length-1) {
-            isBottom = true;
-        }
-
-        if (zeroPosition[1] == 0) {
-            isLeft = true;
-        }
-
-        if (zeroPosition[1] == blocks.length-1) {
-            isRight = true;
-        }
 
         // Create new board
         int[][] tmpArray = new int[blocks.length][];
@@ -137,7 +118,7 @@ public class Board {
             tmpArray[a] = blocks[a].clone();
         }
 
-        if (!isTop) {
+        if (!(zeroPosition[0] == 0)) {
             int[][] topNeighbor = cloneBlocks();
             topNeighbor[zeroPosition[0]][zeroPosition[1]] = topNeighbor[zeroPosition[0] - 1][zeroPosition[1]];
             topNeighbor[zeroPosition[0] - 1][zeroPosition[1]] = 0;
@@ -145,21 +126,21 @@ public class Board {
 
         }
 
-        if (!isBottom) {
+        if (!(zeroPosition[0] == blocks.length-1)) {
             int[][] bottomNeighbor = cloneBlocks();
             bottomNeighbor[zeroPosition[0]][zeroPosition[1]] = bottomNeighbor[zeroPosition[0] + 1][zeroPosition[1]];
             bottomNeighbor[zeroPosition[0] + 1][zeroPosition[1]] = 0;
             neighbors.add(new Board(bottomNeighbor));
         }
 
-        if (!isLeft) {
+        if (!(zeroPosition[1] == 0)) {
             int[][] leftNeighbor = cloneBlocks();
             leftNeighbor[zeroPosition[0]][zeroPosition[1]] = leftNeighbor[zeroPosition[0]][zeroPosition[1] - 1];
             leftNeighbor[zeroPosition[0]][zeroPosition[1] - 1] = 0;
             neighbors.add(new Board(leftNeighbor));
         }
 
-        if (!isRight) {
+        if (!(zeroPosition[1] == blocks.length-1)) {
             int[][] rightNeighbor = cloneBlocks();
             rightNeighbor[zeroPosition[0]][zeroPosition[1]] = rightNeighbor[zeroPosition[0]][zeroPosition[1] + 1];
             rightNeighbor[zeroPosition[0]][zeroPosition[1] + 1] = 0;
