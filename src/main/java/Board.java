@@ -62,7 +62,19 @@ public class Board {
     }
 
     public boolean isGoal() {
-        return false;
+        int expectedValue;
+        for (int i = 0; i < blocks.length; i++) {
+            for (int j = 0; j < blocks[i].length; j++) {
+                expectedValue = (((blocks.length * i) + j) + 1);
+                if (blocks[i][j] != 0) {
+                    if (blocks[i][j] != expectedValue) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 
     public boolean equals(Object y) {

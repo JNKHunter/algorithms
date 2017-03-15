@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by jhunter on 3/14/17.
@@ -37,5 +39,11 @@ public class BoardTest {
     public void testManhattan() throws Exception {
         assertEquals(10, board.manhattan());
         assertEquals(0, board4x4.manhattan());
+    }
+
+    @Test
+    public void testIsGoal() throws Exception {
+        //assertTrue(board4x4.isGoal());
+        assertFalse(board.isGoal());
     }
 }
