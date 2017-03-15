@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by jhunter on 3/14/17.
  */
@@ -5,10 +9,21 @@ public class Board {
 
     private int[][] blocks;
     private int dimension;
+    private int[] zeroPosition;
 
     public Board(int[][] blocks) {
         this.blocks = blocks;
         dimension = blocks.length;
+
+        for (int i = 0; i < blocks.length; i++) {
+            for (int j = 0; j < blocks[i].length; j++) {
+                if (blocks[i][j] == 0) {
+                    zeroPosition = new int[2];
+                    zeroPosition[0] = i;
+                    zeroPosition[1] = j;
+                }
+            }
+        }
     }
 
     public Board twin() {
@@ -25,7 +40,7 @@ public class Board {
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
 
-                //While we are not on the last block
+                // While we are not on the last block
                 if (!(i == blocks.length-1 && j == blocks[blocks.length-1].length-1)) {
 
                     int expectedValue = (((blocks.length * i) + j) + 1);
@@ -93,8 +108,65 @@ public class Board {
     }
 
     public Iterable<Board> neighbors() {
+        boolean isTop = false;
+        boolean isBottom = false;
+        boolean isLeft = false;
+        boolean isRight = false;
+        List<Board> neighbors = new ArrayList<>();
 
-        return null;
+        if (zeroPosition[0] == 0) {
+            isTop = true;
+        }
+
+        if (zeroPosition[0] == blocks.length-1) {
+            isBottom = true;
+        }
+
+        if (zeroPosition[1] == 0) {
+            isLeft = true;
+        }
+
+        if (zeroPosition[1] == blocks.length-1) {
+            isRight = true;
+        }
+
+        // Create new board
+        int[][] tmpArray = new int[blocks.length][];
+
+        for (int a = 0; a < blocks.length; a++) {
+            tmpArray[a] = blocks[a].clone();
+        }
+
+        if (!isTop) {
+            int[][] topNeighbor = cloneBlocks();
+            topNeighbor[zeroPosition[0]][zeroPosition[1]] = topNeighbor[zeroPosition[0] - 1][zeroPosition[1]];
+            topNeighbor[zeroPosition[0] - 1][zeroPosition[1]] = 0;
+            neighbors.add(new Board(topNeighbor));
+
+        }
+
+        if (!isBottom) {
+            int[][] bottomNeighbor = cloneBlocks();
+            bottomNeighbor[zeroPosition[0]][zeroPosition[1]] = bottomNeighbor[zeroPosition[0] + 1][zeroPosition[1]];
+            bottomNeighbor[zeroPosition[0] + 1][zeroPosition[1]] = 0;
+            neighbors.add(new Board(bottomNeighbor));
+        }
+
+        if (!isLeft) {
+            int[][] leftNeighbor = cloneBlocks();
+            leftNeighbor[zeroPosition[0]][zeroPosition[1]] = leftNeighbor[zeroPosition[0]][zeroPosition[1] - 1];
+            leftNeighbor[zeroPosition[0]][zeroPosition[1] - 1] = 0;
+            neighbors.add(new Board(leftNeighbor));
+        }
+
+        if (!isRight) {
+            int[][] rightNeighbor = cloneBlocks();
+            rightNeighbor[zeroPosition[0]][zeroPosition[1]] = rightNeighbor[zeroPosition[0]][zeroPosition[1] + 1];
+            rightNeighbor[zeroPosition[0]][zeroPosition[1] + 1] = 0;
+            neighbors.add(new Board(rightNeighbor));
+        }
+
+        return neighbors;
     }
 
     public String toString() {
@@ -108,6 +180,16 @@ public class Board {
         }
 
         return outputString;
+    }
+
+    private int[][] cloneBlocks() {
+        int[][] tmpArray = new int[blocks.length][];
+
+        for (int a = 0; a < blocks.length; a++) {
+            tmpArray[a] = blocks[a].clone();
+        }
+
+        return tmpArray;
     }
 
 }

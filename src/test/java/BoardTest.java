@@ -1,6 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -22,7 +25,7 @@ public class BoardTest {
     public void setUp() throws Exception {
         blocks = new int[][] {{8,1,3},{4,0,2},{7,6,5}};
         blocksNotEqual = new int[][] {{8,1,2},{4,0,3},{7,6,5}};
-        blocks4x4 = new int[][] {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,0}};
+        blocks4x4 = new int[][] {{1,2,3,4},{5,6,7,8},{9,10,11,0},{13,14,15,0}};
 
 
         board = new Board(blocks);
@@ -61,7 +64,12 @@ public class BoardTest {
 
     @Test
     public void outout() throws Exception {
-        System.out.println(board.toString());
-        System.out.println(board4x4.toString());
+        // System.out.println(board.toString());
+        // System.out.println(board4x4.toString());
+        List<Board> neighbors = (ArrayList<Board>) board4x4.neighbors();
+
+        for(Board board : neighbors) {
+            System.out.println(board);
+        }
     }
 }
