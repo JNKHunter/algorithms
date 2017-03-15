@@ -33,13 +33,13 @@ public class Solver {
             }
         });
 
+        gameTree = new ArrayList<>();
+
         previous = null;
         searchNode = initial;
-        gameTree = new ArrayList<>();
 
         while (!searchNode.isGoal()) {
             previous = searchNode;
-            searchNode = queue.delMin();
             gameTree.add(searchNode);
 
             List<Board> neighbors = (ArrayList<Board>) searchNode.neighbors();
@@ -49,7 +49,11 @@ public class Solver {
                     queue.insert(neighbor);
                 }
             }
+
+            searchNode = queue.delMin();
+            moves += 1;
         }
+        gameTree.add(searchNode);
     }
 
     public boolean isSolvabale() {

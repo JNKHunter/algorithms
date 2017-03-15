@@ -64,8 +64,6 @@ public class BoardTest {
 
     @Test
     public void outout() throws Exception {
-        // System.out.println(board.toString());
-        // System.out.println(board4x4.toString());
         System.out.println(board);
         System.out.println(board.twin());
     }
