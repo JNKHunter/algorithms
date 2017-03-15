@@ -19,17 +19,16 @@ public class Solver {
 
     public Solver(Board initial) {
 
-        Board searchNode;
+        isSolvable = true;
 
         if (initial == null) {
             throw new NullPointerException("Initial board can not be null");
         }
+
         queue = getQueue();
-
         gameTree = new ArrayList<>();
-
         previous = null;
-        searchNode = initial;
+        Board searchNode = initial;
 
         while (!searchNode.isGoal()) {
             previous = searchNode;
@@ -62,7 +61,7 @@ public class Solver {
         });
     }
 
-    public boolean isSolvabale() {
+    public boolean isSolvable() {
         return isSolvable;
     }
 
