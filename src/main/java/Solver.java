@@ -1,6 +1,8 @@
 import edu.princeton.cs.algs4.MinPQ;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by jhunter on 3/15/17.
@@ -8,10 +10,15 @@ import java.util.Comparator;
 public class Solver {
 
     private int moves = 0;
+    private Board previous;
 
     private MinPQ<Board> queue;
+    private List<Board> gameTree;
 
     public Solver(Board initial) {
+
+        Board searchNode;
+
         if (initial == null) {
             throw new NullPointerException("Initial board can not be null");
         }
@@ -25,7 +32,24 @@ public class Solver {
                 return 0;
             }
         });
-        queue.insert(initial);
+
+        previous = null;
+        searchNode = initial;
+        gameTree = new ArrayList<>();
+
+        while (!searchNode.isGoal()) {
+            previous = searchNode;
+            searchNode = queue.delMin();
+            gameTree.add(searchNode);
+
+            List<Board> neighbors = (ArrayList<Board>) searchNode.neighbors();
+
+            for (Board neighbor : neighbors){
+                if (!neighbor.equals(previous)) {
+                    queue.insert(neighbor);
+                }
+            }
+        }
     }
 
     public boolean isSolvabale() {
@@ -37,6 +61,6 @@ public class Solver {
     }
 
     public Iterable<Board> solution() {
-        return null;
+        return gameTree;
     }
 }
