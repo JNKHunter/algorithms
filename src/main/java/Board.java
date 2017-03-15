@@ -3,8 +3,8 @@
  */
 public class Board {
 
-    int[][] blocks;
-    int dimension;
+    private int[][] blocks;
+    private int dimension;
 
     public Board(int[][] blocks) {
         this.blocks = blocks;
@@ -20,11 +20,45 @@ public class Board {
     }
 
     public int hamming() {
-        return 0;
+        int count = 0;
+
+        for (int i = 0; i < blocks.length; i++) {
+            for (int j = 0; j < blocks[i].length; j++) {
+
+                //While we are not on the last block
+                if (!(i == blocks.length-1 && j == blocks[blocks.length-1].length-1)) {
+
+                    int expectedValue = (((blocks.length * i) + j) + 1);
+                    if (blocks[i][j] != expectedValue) {
+                        count += 1;
+                    }
+                }
+            }
+        }
+
+        return count;
     }
 
     public int manhattan() {
-        return 0;
+        int count = 0;
+        int expectedRow;
+        int expectedCol;
+
+        for (int i = 0; i < blocks.length; i++) {
+            for (int j = 0; j < blocks[i].length; j++) {
+
+                if (blocks[i][j] != 0){
+
+                    expectedRow = (blocks[i][j] - 1) / blocks.length;
+                    expectedCol = (blocks[i][j] - 1) % blocks.length;
+
+                    count += Math.abs(expectedRow - i) + Math.abs(expectedCol - j);
+
+                }
+            }
+        }
+
+        return count;
     }
 
     public boolean isGoal() {
