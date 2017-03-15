@@ -58,4 +58,10 @@ public class BoardTest {
         assertTrue(board4x4.equals(board4x4Copy));
         assertFalse(board.equals(boardNotEqual));
     }
+
+    @Test
+    public void outout() throws Exception {
+        System.out.println(board.toString());
+        System.out.println(board4x4.toString());
+    }
 }

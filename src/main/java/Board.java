@@ -93,11 +93,21 @@ public class Board {
     }
 
     public Iterable<Board> neighbors() {
+
         return null;
     }
 
     public String toString() {
-        return this.toString();
+        String outputString = "";
+
+        for (int i = 0; i < blocks.length; i++) {
+            for (int j = 0; j < blocks[i].length; j++) {
+                outputString += "\t" + blocks[i][j];
+            }
+            outputString += "\n";
+        }
+
+        return outputString;
     }
 
 }
