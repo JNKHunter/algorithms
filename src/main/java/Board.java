@@ -13,7 +13,7 @@ public class Board {
     private int[] zeroPosition;
 
     public Board(int[][] blocks) {
-        this.blocks = blocks;
+        this.blocks = cloneBlocks(blocks);
         dimension = blocks.length;
 
         for (int i = 0; i < blocks.length; i++) {
@@ -29,10 +29,24 @@ public class Board {
 
     public Board twin() {
         int[][] twin = cloneBlocks();
-        int randomRow1 = StdRandom.uniform(0, dimension());
-        int randomCol1 = StdRandom.uniform(0, dimension());
-        int randomRow2 = StdRandom.uniform(0, dimension());
-        int randomCol2 = StdRandom.uniform(0, dimension());
+        int randomRow1;
+        int randomCol1;
+        int randomRow2;
+        int randomCol2;
+
+        randomRow1 = randomRow2 = randomCol1 = randomCol2 = 0;
+
+        while (randomRow2 == randomRow1 && randomRow2 != zeroPosition[0] && randomRow1 != zeroPosition[0]) {
+            randomRow1 = StdRandom.uniform(0, dimension());
+            randomRow2 = StdRandom.uniform(0, dimension());
+        }
+
+        while (randomCol2 == randomCol1 && randomCol2 != zeroPosition[1] && randomCol1 != zeroPosition[1]) {
+            randomCol1 = StdRandom.uniform(0, dimension());
+            randomCol2 = StdRandom.uniform(0, dimension());
+        }
+
+
         int tmp = twin[randomRow1][randomCol1];
         twin[randomRow1][randomCol1] = twin[randomRow2][randomCol2];
         twin[randomRow2][randomCol2] = tmp;
@@ -71,7 +85,7 @@ public class Board {
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
 
-                if (blocks[i][j] != 0){
+                if (blocks[i][j] != 0) {
 
                     expectedRow = (blocks[i][j] - 1) / blocks.length;
                     expectedCol = (blocks[i][j] - 1) % blocks.length;
@@ -102,7 +116,12 @@ public class Board {
     }
 
     public boolean equals(Object y) {
-        if (this.dimension() != ((Board) y).dimension()){
+
+        if (y == null) {
+            return false;
+        }
+
+        if (this.dimension() != ((Board) y).dimension()) {
             return false;
         }
 
@@ -153,23 +172,27 @@ public class Board {
     }
 
     public String toString() {
-        String outputString = "";
+        StringBuffer outputString = new StringBuffer();
 
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
-                outputString += "\t" + blocks[i][j];
+                outputString.append("\t" + blocks[i][j]);
             }
-            outputString += "\n";
+            outputString.append("\n");
         }
 
-        return outputString;
+        return outputString.toString();
     }
 
     private int[][] cloneBlocks() {
-        int[][] tmpArray = new int[blocks.length][];
+        return cloneBlocks(blocks);
+    }
 
-        for (int a = 0; a < blocks.length; a++) {
-            tmpArray[a] = blocks[a].clone();
+    private int[][] cloneBlocks(int[][] gameBlocks) {
+        int[][] tmpArray = new int[gameBlocks.length][];
+
+        for (int a = 0; a < gameBlocks.length; a++) {
+            tmpArray[a] = gameBlocks[a].clone();
         }
 
         return tmpArray;

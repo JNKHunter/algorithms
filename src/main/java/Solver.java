@@ -44,7 +44,7 @@ public class Solver {
 
             List<Board> neighbors = (ArrayList<Board>) searchNode.neighbors();
 
-            for (Board neighbor : neighbors){
+            for (Board neighbor : neighbors) {
                 if (!neighbor.equals(previous)) {
                     queue.insert(neighbor);
                 }
