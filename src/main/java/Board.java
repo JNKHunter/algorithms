@@ -13,8 +13,9 @@ public class Board {
     private int[] zeroPosition;
 
     public Board(int[][] blocks) {
-        this.blocks = cloneBlocks(blocks);
         dimension = blocks.length;
+        this.blocks = cloneBlocks(blocks);
+
 
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
@@ -174,9 +175,20 @@ public class Board {
     public String toString() {
         StringBuffer outputString = new StringBuffer();
 
+        outputString.append(dimension + "\n");
+
+        String outputFormatFirst = "%" + (dimension-1) + "d";
+        String outputFormatRest = "%" + dimension + "d";
+
         for (int i = 0; i < blocks.length; i++) {
+
             for (int j = 0; j < blocks[i].length; j++) {
-                outputString.append("\t" + blocks[i][j]);
+                if (j == 0){
+                    outputString.append(String.format("%2d", blocks[i][j]));
+                } else {
+                    outputString.append(String.format("%3d", blocks[i][j]));
+                }
+
             }
             outputString.append("\n");
         }
@@ -189,12 +201,13 @@ public class Board {
     }
 
     private int[][] cloneBlocks(int[][] gameBlocks) {
-        int[][] tmpArray = new int[gameBlocks.length][];
+        int[][] tmpArray = new int[dimension][dimension];
 
-        for (int a = 0; a < gameBlocks.length; a++) {
-            tmpArray[a] = gameBlocks[a].clone();
+        for (int i = 0; i < gameBlocks.length; i++) {
+            for (int j = 0; j < gameBlocks[i].length; j++) {
+                tmpArray[i][j] = gameBlocks[i][j];
+            }
         }
-
         return tmpArray;
     }
 
