@@ -11,32 +11,41 @@ import java.util.List;
  */
 public class Solver {
 
-    private int moves = 0;
-    private Board previous;
 
-    private MinPQ<Board> queue;
-    private MinPQ<Board> queueTwin;
-    private List<Board> gameTree;
+
+
     private boolean isSolvable;
+
+    // Initial solver
+    private MinPQ<Board> queue;
+    private int moves = 0;
+    private List<Board> gameTree;
+
 
     public Solver(Board initial) {
 
-        isSolvable = true;
+        isSolvable = false;
 
         if (initial == null) {
             throw new NullPointerException("Initial board can not be null");
         }
 
+        Board previous = null;
+        Board previousTwin = null;
+
         queue = getQueue();
         gameTree = new ArrayList<>();
         previous = null;
-        Board searchNode = initial;
 
-        while (!searchNode.isGoal()) {
+        Board searchNode = initial;
+        Board searchNodeTwin = initial.twin();
+        MinPQ<Board> queueTwin = getQueue();
+
+        while (!searchNode.isGoal() || !searchNodeTwin.isGoal()) {
             previous = searchNode;
             gameTree.add(searchNode);
 
-            List<Board> neighbors = (ArrayList<Board>) searchNode.neighbors();
+            Iterable<Board> neighbors = searchNode.neighbors();
 
             for (Board neighbor : neighbors) {
                 if (!neighbor.equals(previous)) {
@@ -46,8 +55,26 @@ public class Solver {
 
             searchNode = queue.delMin();
             moves += 1;
+
+            // Twin search
+            previousTwin = searchNodeTwin;
+            Iterable<Board> neighborsTwin = searchNodeTwin.neighbors();
+
+            for (Board neighborTwin : neighborsTwin) {
+                if (!neighborTwin.equals(previousTwin)) {
+                    queueTwin.insert((neighborTwin));
+                }
+            }
+
+            searchNodeTwin = queueTwin.delMin();
         }
-        gameTree.add(searchNode);
+        if (searchNode.isGoal()){
+            gameTree.add(searchNode);
+            isSolvable = true;
+        } else {
+            isSolvable = false;
+        }
+
     }
 
     private MinPQ<Board> getQueue() {

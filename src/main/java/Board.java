@@ -35,18 +35,13 @@ public class Board {
         int randomRow2;
         int randomCol2;
 
-        randomRow1 = randomRow2 = randomCol1 = randomCol2 = 0;
-
-        while (randomRow2 == randomRow1 && randomRow2 != zeroPosition[0] && randomRow1 != zeroPosition[0]) {
+        do {
             randomRow1 = StdRandom.uniform(0, dimension());
             randomRow2 = StdRandom.uniform(0, dimension());
-        }
 
-        while (randomCol2 == randomCol1 && randomCol2 != zeroPosition[1] && randomCol1 != zeroPosition[1]) {
             randomCol1 = StdRandom.uniform(0, dimension());
             randomCol2 = StdRandom.uniform(0, dimension());
-        }
-
+        } while (twin[randomRow1][randomCol1] == 0 || twin[randomRow2][randomCol2] == 0);
 
         int tmp = twin[randomRow1][randomCol1];
         twin[randomRow1][randomCol1] = twin[randomRow2][randomCol2];
@@ -118,11 +113,18 @@ public class Board {
 
     public boolean equals(Object y) {
 
+        if (this == y) {
+            return true;
+        }
         if (y == null) {
             return false;
         }
 
-        if (this.dimension() != ((Board) y).dimension()) {
+        if (!(y.getClass() == Board.class)) {
+            return false;
+        }
+
+        if (((Board) y).dimension() != this.dimension()) {
             return false;
         }
 
@@ -177,16 +179,21 @@ public class Board {
 
         outputString.append(dimension + "\n");
 
-        String outputFormatFirst = "%" + (dimension-1) + "d";
-        String outputFormatRest = "%" + dimension + "d";
+        String outputFormatFirst = "%3d";
+        String outputFormatRest = "%4d";
+
+        if (dimension > 101) {
+            outputFormatFirst = "%4d";
+            outputFormatRest = "%5d";
+        }
 
         for (int i = 0; i < blocks.length; i++) {
 
             for (int j = 0; j < blocks[i].length; j++) {
                 if (j == 0){
-                    outputString.append(String.format("%2d", blocks[i][j]));
+                    outputString.append(String.format(outputFormatFirst, blocks[i][j]));
                 } else {
-                    outputString.append(String.format("%3d", blocks[i][j]));
+                    outputString.append(String.format(outputFormatRest, blocks[i][j]));
                 }
 
             }
