@@ -30,22 +30,26 @@ public class Board {
 
     public Board twin() {
         int[][] twin = cloneBlocks();
-        int randomRow1;
-        int randomCol1;
-        int randomRow2;
-        int randomCol2;
 
-        do {
-            randomRow1 = StdRandom.uniform(0, dimension());
-            randomRow2 = StdRandom.uniform(0, dimension());
+        boolean swapped = false;
 
-            randomCol1 = StdRandom.uniform(0, dimension());
-            randomCol2 = StdRandom.uniform(0, dimension());
-        } while (twin[randomRow1][randomCol1] == 0 || twin[randomRow2][randomCol2] == 0);
+        for (int i = 0; i < twin.length; i++) {
+                if (swapped) {
+                    break;
+                }
+            for (int j = 0; j < twin[i].length -1; j++) {
+                if (swapped) {
+                    break;
+                }
+                if (twin[i][j] != 0 && twin[i][j+1] != 0) {
+                    int tmp = twin[i][j];
+                    twin[i][j] = twin[i][j+1];
+                    twin[i][j+1] = tmp;
+                    swapped = true;
+                }
+            }
+        }
 
-        int tmp = twin[randomRow1][randomCol1];
-        twin[randomRow1][randomCol1] = twin[randomRow2][randomCol2];
-        twin[randomRow2][randomCol2] = tmp;
         return new Board(twin);
     }
 
@@ -182,7 +186,7 @@ public class Board {
         String outputFormatFirst = "%3d";
         String outputFormatRest = "%4d";
 
-        if (dimension > 101) {
+        if (dimension > 10) {
             outputFormatFirst = "%4d";
             outputFormatRest = "%5d";
         }
@@ -195,7 +199,6 @@ public class Board {
                 } else {
                     outputString.append(String.format(outputFormatRest, blocks[i][j]));
                 }
-
             }
             outputString.append("\n");
         }

@@ -17,7 +17,6 @@ public class Solver {
     private boolean isSolvable;
 
     // Initial solver
-    private MinPQ<Board> queue;
     private int moves = 0;
     private List<Board> gameTree;
 
@@ -33,15 +32,15 @@ public class Solver {
         Board previous = null;
         Board previousTwin = null;
 
-        queue = getQueue();
         gameTree = new ArrayList<>();
         previous = null;
 
         Board searchNode = initial;
         Board searchNodeTwin = initial.twin();
+        MinPQ<Board> queue = getQueue();
         MinPQ<Board> queueTwin = getQueue();
 
-        while (!searchNode.isGoal() || !searchNodeTwin.isGoal()) {
+        while (!(searchNode.isGoal() || searchNodeTwin.isGoal())) {
             previous = searchNode;
             gameTree.add(searchNode);
 
@@ -73,6 +72,9 @@ public class Solver {
             isSolvable = true;
         } else {
             isSolvable = false;
+            moves = -1;
+            gameTree = null;
+
         }
 
     }
