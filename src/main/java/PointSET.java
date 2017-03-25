@@ -1,7 +1,9 @@
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.TreeSet;
 
 /**
@@ -51,13 +53,35 @@ public class PointSET {
     }
 
     public Iterable<Point2D> range(RectHV rect) {
+
+        List<Point2D> points = new ArrayList<>();
+
         if (rect == null) {
             throw new NullPointerException("Rect Cannot Be Null");
         }
-        return null;
+
+        for (Point2D point : point2DS) {
+            if (rect.contains(point)) {
+                points.add(point);
+            }
+        }
+        return points;
     }
 
     public Point2D nearest(Point2D p) {
-        return null;
+        Point2D closest= null;
+
+        for (Point2D point : point2DS) {
+
+            if (closest != null) {
+                if (p.distanceTo(point) < p.distanceTo(closest)) {
+                    closest = point;
+                }
+            } else {
+                closest = point;
+            }
+
+        }
+        return closest;
     }
 }
