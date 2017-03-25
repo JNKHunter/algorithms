@@ -1,34 +1,49 @@
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 
+import java.util.Comparator;
+import java.util.TreeSet;
+
 /**
  * Created by jhunter on 3/21/17.
  */
 public class PointSET {
 
-    public PointSET() {
+    private TreeSet<Point2D> point2DS;
+    private int count;
 
+    public PointSET() {
+        count = 0;
+        point2DS = new TreeSet<>(new Comparator<Point2D>() {
+            @Override
+            public int compare(Point2D point2D, Point2D t1) {
+                return point2D.compareTo(t1);
+            }
+        });
     }
 
     public boolean isEmpty() {
-        return true;
+        return(count == 0);
     }
 
     public int size() {
-        return 0;
+        return count;
     }
 
     public void insert(Point2D p) {
         if (p == null) {
             throw new NullPointerException("Point Cannot Be Null");
         }
+
+        point2DS.add(p);
+        count += 1;
     }
 
     public boolean contains(Point2D p) {
         if (p == null) {
             throw new NullPointerException("Point Cannot Be Null");
         }
-        return false;
+        return(point2DS.contains(p));
     }
 
     public void draw() {
