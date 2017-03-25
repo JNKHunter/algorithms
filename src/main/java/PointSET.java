@@ -1,5 +1,6 @@
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
+import edu.princeton.cs.algs4.StdDraw;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -25,7 +26,7 @@ public class PointSET {
     }
 
     public boolean isEmpty() {
-        return(count == 0);
+        return count == 0;
     }
 
     public int size() {
@@ -45,11 +46,13 @@ public class PointSET {
         if (p == null) {
             throw new NullPointerException("Point Cannot Be Null");
         }
-        return(point2DS.contains(p));
+        return point2DS.contains(p);
     }
 
     public void draw() {
-
+        for (Point2D point : point2DS) {
+            StdDraw.point(point.x(), point.y());
+        }
     }
 
     public Iterable<Point2D> range(RectHV rect) {
