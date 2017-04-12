@@ -30,11 +30,23 @@ public class ThreeSum {
 
                 if (values[i] + values[leftPointer] + values[rightPointer] < 0) {
                     int curStart = leftPointer;
-                    while(values[leftPointer] == values[curStart]) leftPointer++;
+                    while (values[leftPointer] == values[curStart] && leftPointer < rightPointer) leftPointer++;
+                }
+
+                if (values[i] + values[leftPointer] + values[rightPointer] > 0) {
+                    int curEnd = rightPointer;
+                    while (values[rightPointer] == values[curEnd]) rightPointer--;
                 }
             }
 
         }
 
+        StringBuilder builder = new StringBuilder();
+
+        for (int[] value : storedValues) {
+            for (int i = 0; i < value.length; i++) {
+                builder.append(value[i]);
+            }
+        }
     }
 }
