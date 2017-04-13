@@ -33,20 +33,25 @@ public class ThreeSum {
                     while (values[leftPointer] == values[curStart] && leftPointer < rightPointer) leftPointer++;
                 }
 
-                if (values[i] + values[leftPointer] + values[rightPointer] > 0) {
+                else {
                     int curEnd = rightPointer;
-                    while (values[rightPointer] == values[curEnd]) rightPointer--;
+                    while (values[rightPointer] == values[curEnd] && leftPointer < rightPointer) rightPointer--;
                 }
             }
 
         }
 
         StringBuilder builder = new StringBuilder();
-
+        int counter = 1;
         for (int[] value : storedValues) {
+            builder.append("Three sum values: ");
             for (int i = 0; i < value.length; i++) {
                 builder.append(value[i]);
+                builder.append(",");
             }
+            builder.append("\n");
         }
+
+        System.out.println(builder.toString());
     }
 }
